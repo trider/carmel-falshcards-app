@@ -6,42 +6,68 @@ class Home extends Component {
     super(props);
     this.state = {
       name: '',
+      isPopulated: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  checkName(event) {
-    if (event.target.value !== '' && event.target.value.length > 0) {
-      this.setState({name: event.target.value, isPopulated: true})
-    } else {
-      this.setState({name: '', isPopulated: false})
+  displayText(text) {
+    if (text.length > 0) {
+      this.setState({isPopulated: true})
+    } 
+    else {
+      this.setState({isPopulated: false})
     }
+    
+  }
+  
+  
+  displayAlert() {
+    if (this.state.name.length > 0) {
+      alert('A name was submitted: ' + this.state.name);
+    } 
   }
 
   handleChange(event) {
-    this.checkName(event)
-    this.setState({name: event.target.value});
+    this.setState({ name: event.target.value });
+    this.displayText(event.target.value)
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.name);
     event.preventDefault();
+    this.displayAlert()
+  }
+
+  displayName() {
+return this.state.isPopulated
+  ? (<p className="App-intro">Your name is: {this.state.name}</p>)
+  : (<p className="App-intro">Please type your name</p>)
+  }
+
+  displayForm() {
+
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" name={this.state.name} onChange={this.handleChange}/>
+            </label>
+          <input type="submit" name="Submit"/>
+        </form>
+      </div>
+ 
+    )
   }
 
   render() {
     return (
       <div className="App">
-        <Welcome />  
-        <p className="App-intro">Please type your name</p>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name={this.state.name} onChange={this.handleChange}/>
-          </label>
-          <input type="submit" name="Submit"/>
-        </form>
+        < Welcome />    
+        {this.displayName()}
+        {this.displayForm()}
       </div>
 
     );
