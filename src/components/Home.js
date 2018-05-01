@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../img/logo.svg';
-import '../styles/App.css';
+import Welcome from './Welcome';
 
 class Home extends Component {
   constructor(props) {
@@ -34,10 +33,7 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h1 className="App-title">Welcome</h1>
-        </header>
+        <Welcome />  
         <p className="App-intro">Please type your name</p>
         <form onSubmit={this.handleSubmit}>
           <label>
