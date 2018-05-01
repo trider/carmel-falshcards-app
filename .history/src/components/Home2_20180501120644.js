@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import Welcome from './Welcome';
-import Terms from './Terms';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      isPopulated: false,
-      displayTerms: false,
+      isPopulated: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,46 +15,34 @@ class Home extends Component {
 
   displayText(text) {
     if (text.length > 0) {
-      this.setState({
-        isPopulated: true,
-        displayTerms: true,
-      })
+      this.setState({isPopulated: true})
     } 
     else {
-      this.setState({
-        isPopulated: false,
-        displayTerms: false,
-      })
-    }   
+      this.setState({isPopulated: false})
+    }
+    
+  }
+  
+  
+  displayAlert() {
+    if (this.state.name.length > 0) {
+      alert('A name was submitted: ' + this.state.name);
+    } 
   }
 
-  displayTermsComponent(text) {
-    if (text.length > 0) {
-      this.setState({displayTerms: true})
-    } 
-    else {
-      this.setState({ displayTerms: false })
-    }   
-  }
-  
-  
   handleChange(event) {
     this.setState({ name: event.target.value });
-    this.displayText(event.target.value);
+    this.displayText(event.target.value)
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.displayText(this.state.name)
-  }
-
-  displayTerms() {
-      return this.state.isPopulated ? (<Terms name={this.state.name}/>): (<div></div>)
+    this.displayAlert()
   }
 
   displayName() {
-    return this.state.isPopulated
-  ? (<p className="App-intro"></p>)
+return this.state.isPopulated
+  ? (<p className="App-intro">Your name is: {this.state.name}</p>)
   : (<p className="App-intro">Please type your name</p>)
   }
 
@@ -64,6 +50,7 @@ class Home extends Component {
 
     return (
       <div>
+        <Welcome />
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
@@ -79,10 +66,11 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        < Welcome />    
+        <header>
+          <h1 className="App-title">Welcome</h1>
+        </header>
         {this.displayName()}
         {this.displayForm()}
-        {this.displayTerms()}
       </div>
 
     );
