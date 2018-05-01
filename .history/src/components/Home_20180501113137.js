@@ -7,17 +7,23 @@ class Home extends Component {
     super(props);
     this.state = {
       name: '',
+      isPopulated: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this
+      .handleChange
+      .bind(this);
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
   }
 
-  checkName(event) {
+  checkName() {
     if (event.target.value !== '' && event.target.value.length > 0) {
       this.setState({name: event.target.value, isPopulated: true})
     } else {
       this.setState({name: '', isPopulated: false})
+
     }
   }
 
@@ -46,6 +52,8 @@ class Home extends Component {
           </label>
           <input type="submit" name="Submit"/>
         </form>
+        <p className="App-intro">Your name is: {this.state.name}
+        </p>
       </div>
 
     );
