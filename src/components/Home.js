@@ -3,90 +3,97 @@ import Welcome from './Welcome';
 import Terms from './Terms';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      isPopulated: false,
-      displayTerms: false,
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: '',
+			isPopulated: false,
+			displayTerms: false
+		};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleBack = this.handleBack.bind(this);
+	}
 
-  displayText(text) {
-    if (text.length > 0) {
-      this.setState({
-        isPopulated: true,
-        displayTerms: true,
-      })
-    } 
-    else {
-      this.setState({
-        isPopulated: false,
-        displayTerms: false,
-      })
-    }   
-  }
+	handleChange(event) {
+		this.setState({name: event.target.value});
+	}
 
-  displayTermsComponent(text) {
-    if (text.length > 0) {
-      this.setState({displayTerms: true})
-    } 
-    else {
-      this.setState({ displayTerms: false })
-    }   
-  }
-  
-  
-  handleChange(event) {
-    this.setState({ name: event.target.value });
-    this.displayText(event.target.value);
-  }
+	handleSubmit(event) {
+		event.preventDefault();
+  this.displayTermsComponent(this.state.name)
+	}
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.displayText(this.state.name)
-  }
+	handleBack(event) {
+		this.setState({
+			isPopulated: false,
+			displayTerms: false,
+			name:''
+		})
+	}
 
-  displayTerms() {
-      return this.state.isPopulated ? (<Terms name={this.state.name}/>): (<div></div>)
-  }
+	displayTermsComponent(text) {
+		if (text.length > 0) {
+			this.setState({
+				displayTerms: true,
+				isPopulated : true,
+			})
+		} else {
+			this.setState({
+					displayTerms: false,
+					isPopulated: false,
+			})
+		}
+	}
 
-  displayName() {
-    return this.state.isPopulated
-  ? (<p className="App-intro"></p>)
-  : (<p className="App-intro">Please type your name</p>)
-  }
+	displayTerms() {
+		return this.state.isPopulated
+			? (<Terms name={this.state.name} />)
+			: (
+				<div></div>
+			)
+	}
 
-  displayForm() {
+	displayName() {
+		return this.state.isPopulated
+			? (
+				<p className="App-intro"></p>
+			)
+			: (
+				<p className="App-intro">Please type your name</p>
+			)
+	}
 
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name={this.state.name} onChange={this.handleChange}/>
-            </label>
-          <input type="submit" name="Submit"/>
-        </form>
-      </div>
- 
-    )
-  }
+	displayForm() {
 
-  render() {
-    return (
-      <div className="App">
-        < Welcome />    
-        {this.displayName()}
-        {this.displayForm()}
-        {this.displayTerms()}
-      </div>
+		return (
+			<div>
+				<Welcome name={'Welcome'}/> {this.displayName()}
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Name:
+						<input type="text" name={this.state.name}
+							value={this.state.name} onChange={this.handleChange} />
+					</label>
+					<input type="submit" name="Submit"/>
+				</form>
+			</div>
 
-    );
-  }
+		)
+	}
+
+	render() {
+		return this.state.displayTerms ? (
+			<div className="App">
+				{this.displayTerms()}
+				<button onClick={this.handleBack}>Back</button>
+			</div>) :
+				(<div className="App">
+				{this.displayForm()}
+				</div>
+			)
+	}
 }
 
 export default Home;
