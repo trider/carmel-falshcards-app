@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../img/logo.svg';
 import '../styles/App.css';
 
-class Home extends Component {
+class Home extends Component {	
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+	handleChange(event) {
     this.setState({name: event.target.value});
   }
 
