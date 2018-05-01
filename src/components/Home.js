@@ -13,16 +13,7 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  checkName(event) {
-    if (event.target.value !== '' && event.target.value.length > 0) {
-      this.setState({name: event.target.value, isPopulated: true})
-    } else {
-      this.setState({name: '', isPopulated: false})
-    }
-  }
-
   handleChange(event) {
-    this.checkName(event)
     this.setState({name: event.target.value});
   }
 
