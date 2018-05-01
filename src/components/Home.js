@@ -18,8 +18,8 @@ class Home extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.name);
     event.preventDefault();
+    alert('A name was submitted: ' + this.state.name);
   }
 
   render() {
