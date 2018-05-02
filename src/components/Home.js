@@ -87,6 +87,7 @@ class Home extends Component {
 		return this.state.displayTerms ? (
 			<div className="App">
 				{this.displayTerms()}
+				<br/>
 				<button onClick={this.handleBack}>Back</button>
 			</div>) :
 				(<div className="App">
