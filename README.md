@@ -25,6 +25,6 @@ Added ``<Terms />`` component to display a list of terms. Style App.css sheet up
 
 ![](/src/img/terms2.png)
 
-Added ``<Cards />``component to display flashcards. Also includes 
+Added ``<Cards />``component to display flashcards. 
 
 ![](/src/img/cards.png)
