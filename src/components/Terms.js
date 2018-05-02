@@ -5,16 +5,20 @@ import Welcome from './Welcome';
 import * as data from '../data/data'
 
 class Terms extends Component {
-	
 
+getTerms() {
+	const terms = data.terms.map((term) => <div className="Term-container" key={term.id}>
+			<p className="Term-title">{term.id}: {term.name}</p>
+			<p className="Term-body">{term.description}</p>
+		</div>);
+	return terms
+}
 
 	render() {
-		const terms = JSON.stringify(data.terms)
-		const list = data.terms
 		return (
 			<div>
-				<Welcome name={'Terms for ' + this.props.name} />
-				<p>{terms}</p>
+				<Welcome name={'Terms for ' + this.props.name}/>
+				{this.getTerms()}
 			</div>
 		);
 	}
